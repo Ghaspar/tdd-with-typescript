@@ -1,0 +1,22 @@
+# Node modules
+node_modules/
+
+# Jest coverage reports
+coverage/
+
+# TypeScript build outputs
+dist/
+*.js
+*.js.map
+
+# Logs
+*.log
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+.env.local
+.env.*.local

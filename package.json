@@ -1,0 +1,25 @@
+{
+  "name": "tdd-with-typescript",
+  "version": "1.0.0",
+  "description": "TDD development",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ghaspar/tdd-with-typescript.git"
+  },
+  "author": "Lucas Gaspar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ghaspar/tdd-with-typescript/issues"
+  },
+  "homepage": "https://github.com/Ghaspar/tdd-with-typescript#readme",
+  "dependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.4",
+    "typescript": "^5.8.3"
+  }
+}
