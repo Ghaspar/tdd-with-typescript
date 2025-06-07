@@ -2,7 +2,20 @@ import { dateRange } from './dateRange';
 
 describe('DateRange value object', () => {
 
+    it('Deve lançar erro se a data de início ou término não forem fornecidas', () => {
+        expect(() => {
+            new dateRange(undefined as unknown as Date, new Date());
+        }).toThrow('Datas de início e término são obrigatórias');
     
+        expect(() => {
+            new dateRange(new Date(), undefined as unknown as Date);
+        }).toThrow('Datas de início e término são obrigatórias');
+    
+        expect(() => {
+            new dateRange(undefined as unknown as Date, undefined as unknown as Date);
+        }).toThrow('Datas de início e término são obrigatórias');
+    });
+
     it('Deve lançar um erro se a data de termino for antes da data de inicio', () => {
         expect(() => {
             new dateRange(new Date('2024-12-25'), new Date('2024-12-20'));
