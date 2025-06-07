@@ -1,31 +1,31 @@
-import { dateRange } from './dateRange';
+import { DateRange } from './dateRange';
 
 describe('DateRange value object', () => {
 
     it('Deve lançar erro se a data de início ou término não forem fornecidas', () => {
         expect(() => {
-            new dateRange(undefined as unknown as Date, new Date());
+            new DateRange(undefined as unknown as Date, new Date());
         }).toThrow('Datas de início e término são obrigatórias');
     
         expect(() => {
-            new dateRange(new Date(), undefined as unknown as Date);
+            new DateRange(new Date(), undefined as unknown as Date);
         }).toThrow('Datas de início e término são obrigatórias');
     
         expect(() => {
-            new dateRange(undefined as unknown as Date, undefined as unknown as Date);
+            new DateRange(undefined as unknown as Date, undefined as unknown as Date);
         }).toThrow('Datas de início e término são obrigatórias');
     });
 
     it('Deve lançar um erro se a data de termino for antes da data de inicio', () => {
         expect(() => {
-            new dateRange(new Date('2024-12-25'), new Date('2024-12-20'));
+            new DateRange(new Date('2024-12-25'), new Date('2024-12-20'));
         }).toThrow('Data de término não pode ser anterior à data de início');
     });
 
     it('Deve criar um objeto dateRange com datas válidas', () => {
         const startDate = new Date('2024-12-20');
         const endDate = new Date('2024-12-25');
-        const validDateRange = new dateRange(startDate, endDate);
+        const validDateRange = new DateRange(startDate, endDate);
         expect(validDateRange.getStartDate()).toEqual(startDate);
         expect(validDateRange.getEndDate()).toEqual(endDate);
     });
@@ -33,7 +33,7 @@ describe('DateRange value object', () => {
     it('Deve calcular o total de noites corretamente', () => {
         const startDate = new Date('2024-12-20');
         const endDate = new Date('2024-12-25');
-        const validDateRange = new dateRange(startDate, endDate);
+        const validDateRange = new DateRange(startDate, endDate);
 
         const totalNights = validDateRange.getTotalNights();
         
@@ -42,12 +42,12 @@ describe('DateRange value object', () => {
 
     it('Deve verificar se dois intervalos de dados se sobrepoem', () => {
         // TODO: Teria que criar mais variedades de cenários para garantir esse tipo de teste
-        const validdateRange1 = new dateRange(
+        const validdateRange1 = new DateRange(
             new Date('2024-12-20'), 
             new Date('2024-12-25')
         );
 
-        const validdateRange2 = new dateRange(
+        const validdateRange2 = new DateRange(
             new Date('2024-12-22'), 
             new Date('2024-12-27')
         );
@@ -63,7 +63,7 @@ describe('DateRange value object', () => {
         const date = new Date('2024-12-20');
 
         expect(() => {
-            new dateRange(date, date);
+            new DateRange(date, date);
         }).toThrow('Data de início e término não podem ser iguais');
     });
 

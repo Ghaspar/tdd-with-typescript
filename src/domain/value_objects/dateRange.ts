@@ -1,4 +1,4 @@
-export class dateRange{
+export class DateRange{
     
     private readonly startDate: Date;
     private readonly endDate: Date;
@@ -35,7 +35,7 @@ export class dateRange{
         return Math.ceil(diffTime / (1000 * 3600 * 24));
     }
 
-    overlaps(other: dateRange): boolean {
+    overlaps(other: DateRange): boolean {
         return this.startDate < other.endDate && other.getStartDate() < this.endDate;
     }
 }
