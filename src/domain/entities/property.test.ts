@@ -52,6 +52,16 @@ describe('Proberty Entity', () => {
             new Date('2024-10-05')
         )
         const totalPrice = property.calculateTotalPrice(dateRange);
-        expect(totalPrice).toBe(600);
+        expect(totalPrice).toBe(400);
+    });
+
+    it('Deve aplicar descontos para estadias de 7 noites ou mais', () => {
+        const property = new Property("1", "Apartamento", "Descrição", 2, 100);
+        const dateRange = new DateRange(
+            new Date('2024-10-01'),
+            new Date('2024-10-08')
+        )
+        const totalPrice = property.calculateTotalPrice(dateRange);
+        expect(totalPrice).toBe(630); // Desconto 7 noites * 100 * 0.9 = 630
     });
 });
