@@ -9,6 +9,7 @@ export class Booking {
     private readonly dateRange: DateRange;
     private readonly numberOfGuests: number;
     private readonly status: 'CONFIRMED' | 'CANCELLED' = 'CONFIRMED';
+    private TotalPrice: number;
     
     constructor(
         id: string,
@@ -17,11 +18,26 @@ export class Booking {
         dateRange: DateRange, 
         numberOfGuests: number
     ) {
+
+        if (numberOfGuests <= 0) {
+            throw new Error('O número de hóspedes deve ser maior que zero');
+        }
+
+        property.validateMaxGuests(numberOfGuests);
+
+        if (!property.isAvailable(dateRange)) {
+            throw new Error('A propriedade já está reservada para as datas selecionadas');
+        }
+
         this.id = id;
         this.property = property;
         this.user = user;
         this.dateRange = dateRange;
         this.numberOfGuests = numberOfGuests;
+        this.TotalPrice = property.calculateTotalPrice(dateRange);
+        this.status = 'CONFIRMED';
+
+        property.addBooking(this);
 
     }
 
@@ -49,4 +65,9 @@ export class Booking {
     getStatus(): 'CONFIRMED' | 'CANCELLED' {
         return this.status;
     }
+
+    getTotalPrice(): number {
+        return this.TotalPrice;
+    }
+
 }
