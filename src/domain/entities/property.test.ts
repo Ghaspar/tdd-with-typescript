@@ -1,6 +1,7 @@
 import { Property } from './property';
 import { DateRange } from '../value_objects/dateRange';
-
+import { Booking } from './booking';
+import { User } from './user';
 
 describe('Proberty Entity', () => {
     it('Deve criar uma instrancia de Property com todos os atributos', () => {
@@ -64,4 +65,27 @@ describe('Proberty Entity', () => {
         const totalPrice = property.calculateTotalPrice(dateRange);
         expect(totalPrice).toBe(630); // Desconto 7 noites * 100 * 0.9 = 630
     });
+
+    // Teste que faria para o Booking entity
+    it('Deve verificar disonibilidade para propriedade', () => {
+        const property = new Property("1", "Apartamento", "Descrição", 2, 100);
+        const user = new User ("1", "Lucas Gaspar");
+        const dateRange = new DateRange(
+            new Date('2024-10-01'),
+            new Date('2024-10-05')
+        );
+
+        const dateRange2 = new DateRange(
+            new Date('2024-10-02'),
+            new Date('2024-10-07')
+        );
+
+        new Booking( "1", property, user, dateRange, 2 );
+            
+        expect(property.isAvailable(dateRange)).toBe(false);
+        expect(property.isAvailable(dateRange2)).toBe(false);
+
+     
+    });
+    
 });
