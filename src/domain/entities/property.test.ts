@@ -85,43 +85,5 @@ describe('Proberty Entity', () => {
         expect(property.isAvailable(dateRange)).toBe(false);
         expect(property.isAvailable(dateRange2)).toBe(false);
     });
-
-
-    it('addBooking deve adicionar a reserva corretamente', () => {
-        const property = new Property("1", "Apartamento", "Descrição", 2, 100);
-        const user = new User ("1", "Lucas Gaspar");
-        const dateRange = new DateRange(
-            new Date('2024-10-01'),
-            new Date('2024-10-05')
-        );
-
-        const booking = new Booking( "1", property, user, dateRange, 2 );
-
-        expect(property.getBookings()).toHaveLength(1);
-        expect(property.getBookings()[0]).toBe(booking);
-    });
-    
-    it('getBookings deve retornar uma cópia da lista', () => {
-        const property = new Property("1", "Apartamento", "Descrição", 3, 100);
-        const user = new User ("1", "Lucas Gaspar");
-        const dateRange = new DateRange(
-            new Date('2024-10-01'),
-            new Date('2024-10-05')
-        );
-
-        const bookings = property.getBookings();
-    
-        bookings.push(
-          new Booking(
-            '2',
-            property,
-            user,
-            dateRange,
-            3
-          )
-        );
-    
-        expect(property.getBookings()).toHaveLength(1);
-      });
     
 });

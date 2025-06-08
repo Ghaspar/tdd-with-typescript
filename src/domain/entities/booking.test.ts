@@ -78,4 +78,68 @@ describe('Booking Entity', () => {
 
     });
 
+    // Testes de cancelamento
+    it('Devem cancelar uma reserva sem reembolso quando fatam menos de 1 dia para o check-in', () => {
+        const property = new Property( "1", "Casa", "Descrição", 4, 300 );
+        const user = new User ("1", "Lucas Gaspar");
+        const validDateRange = new DateRange(new Date('2024-12-20'), new Date('2024-12-22'));
+        
+        const booking = new Booking("1", property, user, validDateRange, 4);
+
+        const currentDate = new Date('2024-12-20');
+
+        booking.cancel(currentDate);
+
+        expect(booking.getStatus()).toBe('CANCELLED');
+        expect(booking.getTotalPrice()).toBe(600);
+    });
+
+
+    it('Devem cancelar uma reserva com reembolso total quando a data for superior a 7 antes do check-in', () => {
+        const property = new Property( "1", "Casa", "Descrição", 4, 300 );
+        const user = new User ("1", "Lucas Gaspar");
+        const validDateRange = new DateRange(new Date('2024-12-20'), new Date('2024-12-25'));
+        
+        const booking = new Booking("1", property, user, validDateRange, 4);
+
+        const currentDate = new Date('2024-12-10');
+
+        booking.cancel(currentDate);
+
+        expect(booking.getStatus()).toBe('CANCELLED');
+        expect(booking.getTotalPrice()).toBe(0);
+    });
+
+    it('Devem cancelar uma reserva com reembolso parcial quando a data estiver entre 1 e 7 dias antes do check-in', () => {
+        const property = new Property( "1", "Casa", "Descrição", 4, 300 );
+        const user = new User ("1", "Lucas Gaspar");
+        const validDateRange = new DateRange(new Date('2024-12-20'), new Date('2024-12-25'));
+        
+        const booking = new Booking("1", property, user, validDateRange, 4);
+
+        const currentDate = new Date('2024-12-15');
+
+        booking.cancel(currentDate);
+
+        expect(booking.getStatus()).toBe('CANCELLED');
+        expect(booking.getTotalPrice()).toBe(300 * 5 / 2);
+    });
+
+    it('Devem permitir cancelar a mesma reserva mais que 1 vez', () => {
+        const property = new Property( "1", "Casa", "Descrição", 4, 300 );
+        const user = new User ("1", "Lucas Gaspar");
+        const validDateRange = new DateRange(new Date('2024-12-20'), new Date('2024-12-25'));
+        
+        const booking = new Booking("1", property, user, validDateRange, 4);
+
+        const currentDate = new Date('2024-12-15');
+
+        booking.cancel(currentDate);
+        
+        expect(() => {
+            booking.cancel(currentDate);
+        }
+        ).toThrow('A reserva já está cancelada');
+    });
+
 });
