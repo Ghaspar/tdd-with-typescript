@@ -3,11 +3,11 @@ import { PropertyRepository } from "../../domain/repositories/property_repositor
 
 export class FakePropertyRepository implements PropertyRepository{
      private properties: Property[] = [
-            new Property("1", "Casa de Praia", "Descrição", 0, 200),
-            new Property("2", "Apartamento no centro", "Descrição", 0, 200)
+            new Property("1", "Casa de Praia", "Descrição", 1, 200),
+            new Property("2", "Apartamento no centro", "Descrição", 1, 200)
         ];
     
-        async findPropertyById(id: string): Promise<Property | null> {
+        async findById(id: string): Promise<Property | null> {
             const property = this.properties.find(property => property.getId() === id);
             return property || null;
         }

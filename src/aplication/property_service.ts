@@ -7,11 +7,11 @@ export class PropertyService {
         private readonly propertyRepository: PropertyRepository
     ) {}
 
-    async findPropertyById(id: string): Promise<Property | null> {
-        return await this.propertyRepository.findPropertyById(id);
+    async findById(id: string): Promise<Property | null> {
+        return await this.propertyRepository.findById(id);
     }
 
-    async saveProperty(property: Property): Promise<void> {
-        await this.propertyRepository.saveProperty(property);
-    }
+    // async saveProperty(property: Property): Promise<void> {
+    //     await this.propertyRepository.saveProperty(property);
+    // }
 }
